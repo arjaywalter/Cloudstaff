@@ -1,5 +1,5 @@
 import React, { useEffect, useCallback } from 'react';
-import { StyleSheet, FlatList, View, Text, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, FlatList, View, Text, TouchableOpacity, Image, Alert } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import _ from 'lodash';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -19,6 +19,25 @@ function Home({ navigation }) {
   useEffect(() => {
     dispatch(getTopStories({}));
   }, []);
+
+  const showAlert = () =>
+  Alert.alert(
+    "hello world",
+    [
+      {
+        text: "Cancel",
+        onPress: () => Alert.alert("Cancel Pressed"),
+        style: "cancel",
+      },
+    ],
+    {
+      cancelable: true,
+      onDismiss: () =>
+        Alert.alert(
+          "This alert was dismissed by tapping outside of the alert dialog."
+        ),
+    }
+  );
 
   const keyExtractor = useCallback(item => item.id.toString(), []);
 
@@ -48,7 +67,7 @@ function Home({ navigation }) {
             <TouchableOpacity
               style={{ paddingEnd: 16 }}
               onPress={() => {
-                console.log("ON PRESS MORE")
+                showAlert();
               }}>
               <Icon
                 name="more-horiz"
