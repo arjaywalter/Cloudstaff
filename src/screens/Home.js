@@ -47,9 +47,7 @@ function Home({ navigation }) {
     return (
       <View style={styles.itemContainer}>
         <TouchableOpacity
-          onPress={() => {
-            onPressUserImage(comment.owner);
-          }}>
+          onPress={() => {}}>
           <Image
             style={styles.image}
             source={{ uri: image }}
