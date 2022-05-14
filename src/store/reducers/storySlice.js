@@ -7,10 +7,10 @@ export const getTopStories = createAsyncThunk(
     try {
       // const storyIds = await fetchTopStoriesApi();
       const data = [
-        { id: 1, image: 'https://walkerstreep-bucket.s3.us-east-2.amazonaws.com/aw0001/avatars/IMG_0002.JPG', name: 'Steven Mathers', description: 'Rrrr', date: '2021-05-14T06:50:01.000Z' },
-        { id: 2, image: 'https://walkerstreep-bucket.s3.us-east-2.amazonaws.com/aw0001/avatars/IMG_0002.JPG', name: 'Steven Mathers', description: 'Rrrr', date: '2022-01-27T08:29:30.000Z' },
-        { id: 3, image: 'https://walkerstreep-bucket.s3.us-east-2.amazonaws.com/aw0001/avatars/IMG_0002.JPG', name: 'Steven Mathers', description: 'Rrrr', date: '2021-03-07T01:29:30.000Z' },
-        { id: 4, image: 'https://walkerstreep-bucket.s3.us-east-2.amazonaws.com/aw0001/avatars/IMG_0002.JPG', name: 'Steven Mathers', description: 'Rrrr', date: '2020-11-29T08:29:30.000Z' },
+        { id: 1, image: 'https://walkerstreep-bucket.s3.us-east-2.amazonaws.com/aw0001/avatars/IMG_0002.JPG', name: 'Steven Mathers', description: 'Rrrr', date: '2021-05-14T06:50:01' },
+        { id: 2, image: 'https://walkerstreep-bucket.s3.us-east-2.amazonaws.com/aw0001/avatars/IMG_0002.JPG', name: 'Steven Mathers', description: 'Rrrr', date: '2022-01-27T08:29:30' },
+        { id: 3, image: 'https://walkerstreep-bucket.s3.us-east-2.amazonaws.com/aw0001/avatars/IMG_0002.JPG', name: 'Steven Mathers', description: 'Rrrr', date: '2021-03-07T01:29:45' },
+        { id: 4, image: 'https://walkerstreep-bucket.s3.us-east-2.amazonaws.com/aw0001/avatars/IMG_0002.JPG', name: 'Steven Mathers', description: 'Rrrr', date: '2020-11-29T08:29:30' },
       ];
       const sorted = data.sort((a,b)=>{
         const dateA = new Date(`${a.date}`).valueOf();
@@ -21,6 +21,19 @@ export const getTopStories = createAsyncThunk(
         return 1 
       });
       return sorted;
+    } catch (error) {
+      const message = getErrorMessage(error);
+      return thunkAPI.rejectWithValue(message);
+    }
+  },
+);
+
+export const addItem = createAsyncThunk(
+  'story/addItem',
+  async ({item}, thunkAPI) => {
+    console.log('zxcv', item);
+    try {
+      return item;
     } catch (error) {
       const message = getErrorMessage(error);
       return thunkAPI.rejectWithValue(message);
@@ -57,6 +70,20 @@ export const storySlice = createSlice({
       state.data = action.payload;
     },
     [getTopStories.rejected]: (state, action) => {
+      state.isFetching = false;
+      state.isError = true;
+      state.errorMessage = action.payload;
+    },
+
+    [addItem.pending]: (state, action) => {
+      state.isFetching = true;
+    },
+    [addItem.fulfilled]: (state, action) => {
+      state.isFetching = false;
+      state.data.unshift(action.payload);
+
+    },
+    [addItem.rejected]: (state, action) => {
       state.isFetching = false;
       state.isError = true;
       state.errorMessage = action.payload;

@@ -3,6 +3,7 @@ import { StyleSheet, FlatList, View, Text, TouchableOpacity, Image, Alert } from
 import { useSelector, useDispatch } from 'react-redux';
 import _ from 'lodash';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import moment from 'moment';
 
 import { getTopStories } from '../store/reducers/storySlice';
 
@@ -62,7 +63,7 @@ function Home({ navigation }) {
             }}>
               <Text style={styles.title}>{name}</Text>
               <Text>{description}</Text>
-              <Text style={styles.date}>{date}</Text>
+              <Text style={styles.date}>{moment(date).format('ddd DD MMM, h a')}</Text>
             </View>
             <TouchableOpacity
               style={{ paddingEnd: 16 }}

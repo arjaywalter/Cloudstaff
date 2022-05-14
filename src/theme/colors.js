@@ -3,7 +3,8 @@ const Colors = {
   primaryDark: '#5931B8',
   primaryAccent: '#FF4081',
   primaryLight: '#b168ff',
-  gray20: '#333333'
+  gray20: '#333333',
+  white: '#FFFFFF'
 };
 
 export default Colors;

@@ -5,6 +5,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import {navigationRef} from './RootNavigation';
 import Home from './screens/Home';
+import AddItem from './screens/AddItem';
 import * as RootNavigation from './RootNavigation';
 import Colors from './theme/colors';
 
@@ -15,8 +16,7 @@ const addIcon = require('./assets/images/outline_add_white_24dp.png');
 
 export default function AppNavigation() {
   const onPressAdd = () => {
-    alert('Clicked')
-    // RootNavigation.navigate('Search');
+    RootNavigation.navigate('AddItem');
   };
 
   return (
@@ -29,7 +29,7 @@ export default function AppNavigation() {
             headerTitleStyle: {fontWeight: 'bold'},
           }}>
           <Stack.Group>
-            <Stack.Screen
+          <Stack.Screen
               name="Home"
               component={Home}
               options={{
@@ -39,6 +39,13 @@ export default function AppNavigation() {
                     <Image source={addIcon} />
                   </TouchableOpacity>
                 ),
+              }}
+            />
+            <Stack.Screen
+              name="AddItem"
+              component={AddItem}
+              options={{
+                title:"",
               }}
             />
           </Stack.Group>
