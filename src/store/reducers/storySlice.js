@@ -80,8 +80,7 @@ export const storySlice = createSlice({
     },
     [addItem.fulfilled]: (state, action) => {
       state.isFetching = false;
-      state.data.unshift(action.payload);
-
+      state.data.unshift({...action.payload, id: state.data.length + 1});
     },
     [addItem.rejected]: (state, action) => {
       state.isFetching = false;

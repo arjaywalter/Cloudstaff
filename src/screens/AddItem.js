@@ -16,7 +16,6 @@ function AddItem({ navigation }) {
       onSubmitEditing={(event) => {
         var date = moment().format('YYYY-MM-DDTHH:mm:ss');
         const item = {
-          id: 4,
           image: 'https://walkerstreep-bucket.s3.us-east-2.amazonaws.com/aw0001/avatars/IMG_0002.JPG',
           name: event.nativeEvent.text,
           description: 'Rrrr',

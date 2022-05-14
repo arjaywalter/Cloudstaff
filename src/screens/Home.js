@@ -10,10 +10,10 @@ import { getTopStories } from '../store/reducers/storySlice';
 function Home({ navigation }) {
   const dispatch = useDispatch();
   const {
-    isFetching,
-    isSuccess,
-    isError,
-    errorMessage,
+    // isFetching,
+    // isSuccess,
+    // isError,
+    // errorMessage,
     data,
   } = useSelector(state => state.story);
 
