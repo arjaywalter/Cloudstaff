@@ -6,12 +6,21 @@ export const getTopStories = createAsyncThunk(
   async ({ }, thunkAPI) => {
     try {
       // const storyIds = await fetchTopStoriesApi();
-      return [
-        { id: 1, image: 'https://walkerstreep-bucket.s3.us-east-2.amazonaws.com/aw0001/avatars/IMG_0002.JPG', name: 'Steven Mathers', description: 'Rrrr', date: 'Fri 17 Jun, 3-4pm' },
-        { id: 2, image: 'https://walkerstreep-bucket.s3.us-east-2.amazonaws.com/aw0001/avatars/IMG_0002.JPG', name: 'Steven Mathers', description: 'Rrrr', date: 'Fri 17 Jun, 3-4pm' },
-        { id: 3, image: 'https://walkerstreep-bucket.s3.us-east-2.amazonaws.com/aw0001/avatars/IMG_0002.JPG', name: 'Steven Mathers', description: 'Rrrr', date: 'Fri 17 Jun, 3-4pm' },
-        { id: 4, image: 'https://walkerstreep-bucket.s3.us-east-2.amazonaws.com/aw0001/avatars/IMG_0002.JPG', name: 'Steven Mathers', description: 'Rrrr', date: 'Fri 17 Jun, 3-4pm' }
+      const data = [
+        { id: 1, image: 'https://walkerstreep-bucket.s3.us-east-2.amazonaws.com/aw0001/avatars/IMG_0002.JPG', name: 'Steven Mathers', description: 'Rrrr', date: '2021-05-14T06:50:01.000Z' },
+        { id: 2, image: 'https://walkerstreep-bucket.s3.us-east-2.amazonaws.com/aw0001/avatars/IMG_0002.JPG', name: 'Steven Mathers', description: 'Rrrr', date: '2022-01-27T08:29:30.000Z' },
+        { id: 3, image: 'https://walkerstreep-bucket.s3.us-east-2.amazonaws.com/aw0001/avatars/IMG_0002.JPG', name: 'Steven Mathers', description: 'Rrrr', date: '2021-03-07T01:29:30.000Z' },
+        { id: 4, image: 'https://walkerstreep-bucket.s3.us-east-2.amazonaws.com/aw0001/avatars/IMG_0002.JPG', name: 'Steven Mathers', description: 'Rrrr', date: '2020-11-29T08:29:30.000Z' },
       ];
+      const sorted = data.sort((a,b)=>{
+        const dateA = new Date(`${a.date}`).valueOf();
+        const dateB = new Date(`${b.date}`).valueOf();
+        if(dateA > dateB){
+          return -1; 
+        }
+        return 1 
+      });
+      return sorted;
     } catch (error) {
       const message = getErrorMessage(error);
       return thunkAPI.rejectWithValue(message);
